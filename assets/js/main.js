@@ -259,4 +259,30 @@
    */
   new PureCounter();
 
+  window.openProjectModal = function(button) {
+    const projectItem = button.closest('.project-item');
+    const modal = document.getElementById('projectModal');
+    
+    // Preencher o conteúdo do modal
+    modal.querySelector('.modal-title').textContent = projectItem.dataset.title;
+    modal.querySelector('.modal-body img').src = projectItem.dataset.image;
+    modal.querySelector('.modal-body img').alt = projectItem.dataset.title;
+    modal.querySelector('#projectDescription').textContent = projectItem.dataset.description;
+    
+    // Preencher a lista de características
+    const featuresList = modal.querySelector('#projectFeatures');
+    featuresList.innerHTML = '';
+    JSON.parse(projectItem.dataset.features).forEach(feature => {
+      const li = document.createElement('li');
+      li.textContent = feature;
+      featuresList.appendChild(li);
+    });
+    
+    // Atualizar o link do projeto
+    modal.querySelector('#projectLink').href = projectItem.dataset.link;
+    
+    // Abrir o modal
+    const bsModal = new bootstrap.Modal(modal);
+    bsModal.show();
+  };
 })()

@@ -49,6 +49,7 @@
         <ul>
           <li><a href="#about" class="nav-link scrollto"><i class="bx bx-user"></i> <span>Sobre</span></a></li>
           <li><a href="#skills" class="nav-link scrollto"><i class="bx bx-book-content"></i><span>Skills</span></a></li>
+          <li><a href="#projects" class="nav-link scrollto"><i class="bx bx-code-alt"></i><span>Projetos</span></a></li>
           <li><a href="#contact" class="nav-link scrollto"><i class="bx bx-envelope"></i> <span>Contato</span></a></li>
         </ul>
       </nav><!-- .nav-menu -->
@@ -111,6 +112,90 @@
 
       </div>
     </section><!-- End Skills Section -->
+
+     <!-- ======= Projects Section ======= -->
+     <section id="projects" class="projects">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Projetos</h2>
+          <p>Aqui estão alguns dos projetos em que trabalhei recentemente:</p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+            <div class="project-item" 
+                 data-title="Gerador de Senha" 
+                 data-description="Um gerador de senhas seguras que permite aos usuários criar senhas fortes e personalizadas."
+                 data-image="https://i.ibb.co/QDdvMJ3/imagem-Gerador-Senha.jpg"
+                 data-features='["Geração de senhas com comprimento personalizável", "Opções para incluir letras maiúsculas, minúsculas, números e símbolos", "Interface intuitiva e fácil de usar"]'
+                 data-link="https://andremts-gerador-senha.surge.sh/">
+              <img src="https://i.ibb.co/QDdvMJ3/imagem-Gerador-Senha.jpg" class="img-fluid" alt="Gerador de Senha" width="250">
+              <div class="project-info">
+                <h4>Gerador de Senha</h4>
+                <p>Um gerador de senhas seguras</p>
+                <button type="button" class="btn-project" onclick="openProjectModal(this)">
+                  Ver Mais
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
+            <div class="project-item" 
+                 data-title="Gerador de QR-Codes" 
+                 data-description="Este projeto é um gerador de QR Code moderno e fácil de usar, desenvolvido com Vue.js e Quasar Framework. Ele permite aos usuários criar QR Codes rapidamente a partir de URLs inseridos."
+                 data-image="https://i.ibb.co/P60S8Q5/qrcode.jpg"
+                 data-features='["Interface de usuário intuitiva e responsiva", "Validação de URL em tempo real", "Geração instantânea de QR Code", "Visualização ampliada do QR Code em modal","Notificações de feedback para o usuário"]'
+                 data-link="https://andremts-gerador-qrcode.surge.sh/">
+              <img src="https://i.ibb.co/P60S8Q5/qrcode.jpg" class="img-fluid" alt="Gerador de Senha" width="250">
+              <div class="project-info">
+                <h4>Gerador de QR-Codes</h4>
+                <p>Um gerador de QR-Codes para link's</p>
+                <button type="button" class="btn-project" onclick="openProjectModal(this)">
+                  Ver Mais
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
+            <div class="project-item">
+              <img src="assets/img/project-3.jpg" class="img-fluid" alt="Projeto 3">
+              <div class="project-info">
+                <h4>Nome do Projeto 3</h4>
+                <p>Breve descrição do projeto 3</p>
+                <a href="#" class="btn-project">Ver Mais</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Projects Section -->
+
+<!-- Project Modal -->
+<div class="modal fade" id="projectModal" tabindex="-1" aria-labelledby="projectModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="projectModalLabel"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <img src="" class="img-fluid mb-3" alt="Project Image">
+        <p id="projectDescription"></p>
+        <h6>Características:</h6>
+        <ul id="projectFeatures"></ul>
+      </div>
+      <div class="modal-footer">
+        <a href="#" target="_blank" class="btn btn-primary" id="projectLink">Visitar Projeto</a>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">

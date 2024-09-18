@@ -392,3 +392,73 @@ section {
   font-style: normal;
   font-display: swap;
 }
+
+.projects .project-item {
+  background: #fff;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 30px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+.projects .project-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.projects .project-info {
+  padding: 20px;
+}
+
+.projects .project-info h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.projects .project-info p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.projects .btn-project {
+  display: inline-block;
+  padding: 8px 20px;
+  background: #149ddd;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.projects .btn-project:hover {
+  background: #37b3ed;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: #149ddd;
+  color: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.btn-primary {
+  background-color: #149ddd;
+  border-color: #149ddd;
+}
+
+.btn-primary:hover {
+  background-color: #37b3ed;
+  border-color: #37b3ed;
+}
