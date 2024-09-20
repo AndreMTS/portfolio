@@ -61,9 +61,9 @@
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
       <div class="container">
-        <h3 style="position: relative; text-align: right;">
+        <!-- <h3 style="position: relative; text-align: right;">
           <span class="typed" data-typed-items="Seja bem vindo!"></span>
-        </h3>
+        </h3> -->
         <div class="row">
           <div class="col-lg-4" data-aos="fade-right">
             <img fetchpriority="high" id="profile-img" src="assets/img/profile-img582x582.webp" class="img-fluid" alt="Foto de perfil de André Matos" loading="lazy" width="400" height="400">
@@ -100,21 +100,19 @@
     <!-- ======= Skills Section ======= -->
     <section id="skills" class="skills section-bg">
       <div class="container">
-        <div class="row skills-content">
-          <div class="col-lg-12" data-aos="fade-up">
-            <div class="skill-icons">
-              <img src="https://skillicons.dev/icons?i=vue,js,html,css,bootstrap,postgres,mysql" alt="Skills 1" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=webstorm,vscode,git,postman,kubernetes,docker" alt="Skills 2" loading="lazy">
-              <img src="https://skillicons.dev/icons?i=grafana,electron" alt="Skills 3" loading="lazy">
-            </div>
+        <div class="section-title">
+          <h2>Habilidades</h2>
+        </div>
+        <div class="swiper-container skills-slider">
+          <div class="swiper-wrapper" id="skill-icons">
+            <!-- Os ícones serão inseridos aqui dinamicamente -->
           </div>
         </div>
-
       </div>
     </section><!-- End Skills Section -->
 
-     <!-- ======= Projects Section ======= -->
-     <section id="projects" class="projects">
+    <!-- ======= Projects Section ======= -->
+    <section id="projects" class="projects">
       <div class="container">
 
         <div class="section-title">
@@ -135,7 +133,7 @@
                 <h4>Gerador de Senha</h4>
                 <p>Um gerador de senhas seguras</p>
                 <button type="button" class="btn-project" onclick="openProjectModal(this)">
-                  Ver Mais
+                  Detalhes
                 </button>
               </div>
             </div>
@@ -153,12 +151,12 @@
                 <h4>Gerador de QR-Codes</h4>
                 <p>Um gerador de QR-Codes para link's</p>
                 <button type="button" class="btn-project" onclick="openProjectModal(this)">
-                  Ver Mais
+                 Detalhes
                 </button>
               </div>
             </div>
           </div>
-
+<!-- 
           <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="200">
             <div class="project-item">
               <img src="assets/img/project-3.jpg" class="img-fluid" alt="Projeto 3">
@@ -168,7 +166,7 @@
                 <a href="#" class="btn-project">Ver Mais</a>
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
 
@@ -191,7 +189,6 @@
       </div>
       <div class="modal-footer">
         <a href="#" target="_blank" class="btn btn-primary" id="projectLink">Visitar Projeto</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>

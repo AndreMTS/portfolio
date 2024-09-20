@@ -129,18 +129,18 @@
   /**
    * Hero type effect
    */
-  const typed = select('.typed')
-  if (typed) {
-    let typed_strings = typed.getAttribute('data-typed-items')
-    typed_strings = typed_strings.split(',')
-    new Typed('.typed', {
-      strings: typed_strings,
-      loop: true,
-      typeSpeed: 100,
-      backSpeed: 50,
-      backDelay: 2000
-    });
-  }
+  // const typed = select('.typed')
+  // if (typed) {
+  //   let typed_strings = typed.getAttribute('data-typed-items')
+  //   typed_strings = typed_strings.split(',')
+  //   new Typed('.typed', {
+  //     strings: typed_strings,
+  //     loop: true,
+  //     typeSpeed: 100,
+  //     backSpeed: 50,
+  //     backDelay: 2000
+  //   });
+  // }
 
   /**
    * Skills animation
@@ -285,4 +285,48 @@
     const bsModal = new bootstrap.Modal(modal);
     bsModal.show();
   };
+  
 })()
+
+document.addEventListener('DOMContentLoaded', function() {
+  loadSkills();
+});
+
+function loadSkills() {
+  fetch('assets/skills.json')
+    .then(response => response.json())
+    .then(data => {
+      const skillIconsContainer = document.getElementById('skill-icons');
+      data.skills.forEach(skill => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        const img = document.createElement('img');
+        img.src = `assets/img/skills/${skill}`;
+        img.alt = skill.replace('.png', '');
+        img.title = skill.replace('.png', '');
+        img.className = 'skill-icon'; // Adicionando uma classe específica
+        slide.appendChild(img);
+        skillIconsContainer.appendChild(slide);
+      });
+      
+      // Inicialize o Swiper após adicionar todos os slides
+      initSkillsSlider();
+    })
+    .catch(error => console.error('Erro ao carregar as habilidades:', error));
+}
+
+function initSkillsSlider() {
+  new Swiper('.skills-slider', {
+    slidesPerView: 'auto',
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+    },
+    speed: 5000,
+    grabCursor: true,
+    mousewheelControl: true,
+    keyboardControl: true,
+  });
+}

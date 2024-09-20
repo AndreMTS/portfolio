@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
   width: 300px;
   transition: all ease-in-out 0.5s;
-  z-index: 9997;
+  z-index: 2;
   padding: 0 15px;
   background: #040b14;
   overflow-y: auto;
@@ -308,12 +308,13 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .skill-icons img {
-  max-width: 100%;
-  height: auto;
+  width: 40px;  /* Reduzido de 60px para 40px */
+  height: 40px; /* Reduzido de 60px para 40px */
+  object-fit: contain;
 }
 
 @media (max-width: 768px) {
@@ -424,16 +425,18 @@ section {
 
 .projects .btn-project {
   display: inline-block;
-  padding: 8px 20px;
-  background: #149ddd;
+  background: #45505b;
   color: #fff;
   border-radius: 4px;
   text-decoration: none;
   transition: 0.3s;
+  border: 0px;
+  padding: 5px 20px;
+  width: 100%;
 }
 
 .projects .btn-project:hover {
-  background: #37b3ed;
+  background: #3c4650;
 }
 
 .modal-content {
@@ -441,7 +444,7 @@ section {
 }
 
 .modal-header {
-  background-color: #149ddd;
+  background-color: #45505b;
   color: #fff;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -454,11 +457,57 @@ section {
 }
 
 .btn-primary {
-  background-color: #149ddd;
-  border-color: #149ddd;
+  background-color: #45505b;
+  border-color: #45505b;
 }
 
 .btn-primary:hover {
-  background-color: #37b3ed;
-  border-color: #37b3ed;
+  background-color: #363f47;
+  border-color: #45505b;
+}
+
+.skills-slider {
+  overflow: hidden;
+  position: relative;
+}
+
+.skills-slider .swiper-wrapper {
+  transition-timing-function: linear;
+  display: flex;
+  align-items: center;
+}
+
+.skills-slider .swiper-slide {
+  width: auto;
+  margin-right: 15px;
+}
+
+.skills-slider .swiper-slide img {
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .skills-slider .swiper-slide img {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .skills-slider .swiper-slide {
+    margin-right: 10px;
+  }
+}
+
+.skills-slider .swiper-slide .skill-icon {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .skills-slider .swiper-slide .skill-icon {
+    width: 30px !important;
+    height: 30px !important;
+  }
 }
