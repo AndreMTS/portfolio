@@ -507,7 +507,7 @@ section {
 
 @media (max-width: 768px) {
   .skills-slider .swiper-slide .skill-icon {
-    width: 30px !important;
-    height: 30px !important;
+    width: 50px !important;
+    height: 50px !important;
   }
 }
