@@ -234,7 +234,7 @@ section {
   color: #173b6c;
 }
 
-.section-title h2::after {
+/* .section-title h2::after {
   content: "";
   position: absolute;
   display: block;
@@ -243,7 +243,7 @@ section {
   background: #149ddd;
   bottom: 0;
   left: 0;
-}
+} */
 
 .section-title p {
   margin-bottom: 0;
@@ -395,7 +395,6 @@ section {
 }
 
 .projects .project-item {
-  background: #fff;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 30px;
@@ -459,6 +458,7 @@ section {
 .btn-primary {
   background-color: #45505b;
   border-color: #45505b;
+  color: #ffffff;
 }
 
 .btn-primary:hover {
@@ -489,6 +489,30 @@ section {
 }
 
 @media (max-width: 768px) {
+
+  #projects .row {
+    justify-content: center;
+  }
+
+  #projects .col-lg-4 {
+    width: 90%;
+    margin: 0 auto 20px;
+  }
+
+  #projects .project-item {
+    max-width: 400px;
+    margin: 0 auto 20px;
+  }
+
+  #projects .project-info {
+    text-align: center;
+  }
+
+  #projects .project-info img {
+    margin: 0 auto;
+    display: block;
+  }
+
   .skills-slider .swiper-slide img {
     width: 30px !important;
     height: 30px !important;
@@ -497,6 +521,9 @@ section {
   .skills-slider .swiper-slide {
     margin-right: 10px;
   }
+}
+#fotoProfileBody{
+  text-align: center;
 }
 
 .skills-slider .swiper-slide .skill-icon {
@@ -510,4 +537,201 @@ section {
     width: 50px !important;
     height: 50px !important;
   }
+}
+
+body.dark-mode {
+  background-color: #121212; /* Cor de fundo escura */
+  color: #ffffff; /* Cor do texto clara */
+}
+
+body.dark-mode a {
+  color: #868686; /* Cor dos links no modo escuro */
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background-color: #1e1e1e; /* Cor de fundo do cabeçalho e rodapé */
+}
+
+body.dark-mode .btn-secondary {
+  background-color: #527c8f; /* Cor do botão no modo escuro */
+  color: #ffffff; /* Cor do texto do botão no modo escuro */
+}
+
+body.dark-mode .modal-header {
+  background-color: #212425; /* Cor de fundo do cabeçalho do modal */
+}
+
+body.dark-mode .project-info {
+  background-color: #212425; /* Cor de fundo da informação do projeto */
+}
+
+body.dark-mode .section-bg {
+  background-color: #1e1e1e; /* Cor de fundo das seções */
+  color: rgb(156, 198, 235); /* Cor do texto nas seções */
+}
+
+body.dark-mode h1,
+body.dark-mode h2 {
+  color: #2062a4; /* Cor dos títulos no modo escuro */
+}
+/* ... código existente ... */
+
+/* Estilos para o modal no modo escuro */
+body.dark-mode .modal-content {
+  background-color: #212425; /* Cor de fundo escura para o modal */
+  color: #ffffff; /* Cor do texto no modal */
+}
+
+body.dark-mode .modal-header {
+  background-color: #1e1e1e; /* Cor de fundo do cabeçalho do modal */
+  border-bottom: 1px solid #373737; /* Cor da borda do cabeçalho */
+}
+
+body.dark-mode .modal-footer {
+  background-color: #1e1e1e; /* Cor de fundo do rodapé do modal */
+  border-top: 1px solid #373737; /* Cor da borda do rodapé */
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%); /* Inverte a cor do botão de fechar */
+}
+
+body.dark-mode .modal-body h6 {
+  color: #868686; /* Cor do subtítulo "Características" */
+}
+
+body.dark-mode .modal-body ul {
+  color: #ffffff; /* Cor do texto da lista de características */
+}
+
+body.dark-mode .btn-primary {
+  background-color: #527c8f; /* Cor do botão "Visitar Projeto" */
+  border-color: #527c8f;
+  color: #ffffff;
+}
+
+body.dark-mode .btn-primary:hover {
+  background-color: #3e5f6d; /* Cor do botão ao passar o mouse */
+  border-color: #3e5f6d;
+ 
+}
+
+/* Estilos para cabeçalhos no modo escuro */
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: #707070;
+  transition: color 0.3s ease; /* Adiciona uma transição suave */
+}
+
+/* Efeito hover para os cabeçalhos no modo escuro */
+body.dark-mode h1:hover,
+body.dark-mode h2:hover,
+body.dark-mode h3:hover,
+body.dark-mode h4:hover,
+body.dark-mode h5:hover,
+body.dark-mode h6:hover {
+  color: #868686; /* Cor um pouco mais clara ao passar o mouse */
+}
+
+/* Ajuste específico para títulos de seção */
+body.dark-mode .section-title h2 {
+  color: #707070;
+}
+
+/* Ajuste para títulos dentro dos projetos */
+body.dark-mode .project-info h4 {
+  color: #707070;
+}
+
+/* Ajuste para títulos no modal */
+body.dark-mode .modal-title {
+  color: #707070;
+}
+/* Estilos para o toggle switch */
+.theme-switch-wrapper {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+  border-radius: 50%;
+}
+
+.slider i {
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: .4s;
+  font-size: 18px;
+}
+
+.slider .bx-sun {
+  right: 7px;
+}
+
+.slider .bx-moon {
+  left: 7px;
+  display: none;
+}
+
+input:checked + .slider {
+  background-color: #527c8f;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+input:checked + .slider .bx-sun {
+  display: none;
+}
+
+input:checked + .slider .bx-moon {
+  display: block;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
