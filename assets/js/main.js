@@ -129,18 +129,18 @@
   /**
    * Hero type effect
    */
-  // const typed = select('.typed')
-  // if (typed) {
-  //   let typed_strings = typed.getAttribute('data-typed-items')
-  //   typed_strings = typed_strings.split(',')
-  //   new Typed('.typed', {
-  //     strings: typed_strings,
-  //     loop: true,
-  //     typeSpeed: 100,
-  //     backSpeed: 50,
-  //     backDelay: 2000
-  //   });
-  // }
+  const typed = select('.typed')
+  if (typed) {
+    let typed_strings = typed.getAttribute('data-typed-items')
+    typed_strings = typed_strings.split(',')
+    new Typed('.typed', {
+      strings: typed_strings,
+      loop: true,
+      typeSpeed: 100,
+      backSpeed: 50,
+      backDelay: 2000
+    });
+  }
 
   /**
    * Skills animation
@@ -259,27 +259,30 @@
    */
   new PureCounter();
 
+  /**
+   * Função para abrir o modal de projeto
+   */
   window.openProjectModal = function(button) {
-    const projectItem = button.closest('.project-item');
+    const projectCard = button.closest('.project-card');
     const modal = document.getElementById('projectModal');
     
     // Preencher o conteúdo do modal
-    modal.querySelector('.modal-title').textContent = projectItem.dataset.title;
-    modal.querySelector('.modal-body img').src = projectItem.dataset.image;
-    modal.querySelector('.modal-body img').alt = projectItem.dataset.title;
-    modal.querySelector('#projectDescription').textContent = projectItem.dataset.description;
+    modal.querySelector('.modal-title').textContent = projectCard.dataset.title;
+    modal.querySelector('.modal-body img').src = projectCard.dataset.image;
+    modal.querySelector('.modal-body img').alt = projectCard.dataset.title;
+    modal.querySelector('#projectDescription').textContent = projectCard.dataset.description;
     
     // Preencher a lista de características
     const featuresList = modal.querySelector('#projectFeatures');
     featuresList.innerHTML = '';
-    JSON.parse(projectItem.dataset.features).forEach(feature => {
+    JSON.parse(projectCard.dataset.features).forEach(feature => {
       const li = document.createElement('li');
       li.textContent = feature;
       featuresList.appendChild(li);
     });
     
     // Atualizar o link do projeto
-    modal.querySelector('#projectLink').href = projectItem.dataset.link;
+    modal.querySelector('#projectLink').href = projectCard.dataset.link;
     
     // Abrir o modal
     const bsModal = new bootstrap.Modal(modal);
@@ -289,44 +292,323 @@
 })()
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Inicializar AOS
+  AOS.init({
+    duration: 1000,
+    easing: 'ease-in-out',
+    once: true,
+    mirror: false
+  });
+
+  // Inicializar Swiper para as habilidades
   loadSkills();
+
+  // Preloader
+  const preloader = document.querySelector('#preloader');
+  if (preloader) {
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        preloader.classList.add('fade-out');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 500);
+      }, 1000);
+    });
+  }
+
+  // Verificar tema escuro
+  const checkbox = document.getElementById('checkbox');
+  if (checkbox) {
+    const darkMode = localStorage.getItem('darkMode') === 'true';
+    checkbox.checked = darkMode;
+    document.body.classList.toggle('dark-mode', darkMode);
+  }
+
+  // Back to top button
+  const backtotop = document.querySelector('.back-to-top');
+  if (backtotop) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active');
+      } else {
+        backtotop.classList.remove('active');
+      }
+    });
+  }
+
+  // Header scroll class
+  const selectHeader = document.querySelector('#header');
+  if (selectHeader) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        selectHeader.classList.add('header-scrolled');
+      } else {
+        selectHeader.classList.remove('header-scrolled');
+      }
+    });
+  }
+
+  // Navbar links active state on scroll
+  const navbarlinks = document.querySelectorAll('.scrollto');
+  function navbarlinksActive() {
+    const position = window.scrollY + 200;
+    navbarlinks.forEach(navbarlink => {
+      if (!navbarlink.hash) return;
+      const section = document.querySelector(navbarlink.hash);
+      if (!section) return;
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        navbarlink.classList.add('active');
+      } else {
+        navbarlink.classList.remove('active');
+      }
+    });
+  }
+  window.addEventListener('load', navbarlinksActive);
+  window.addEventListener('scroll', navbarlinksActive);
+
+  // Smooth scroll para links com classe .scrollto
+  document.querySelectorAll('.scrollto').forEach(link => {
+    link.addEventListener('click', function(e) {
+      if (document.querySelector(this.hash)) {
+        e.preventDefault();
+        
+        // Se menu mobile estiver aberto, feche-o
+        const navbar = document.querySelector('.navbar');
+        if (navbar.classList.contains('navbar-mobile')) {
+          navbar.classList.remove('navbar-mobile');
+          const navbarToggle = document.querySelector('.mobile-nav-toggle');
+          navbarToggle.classList.toggle('bi-list');
+          navbarToggle.classList.toggle('bi-x');
+        }
+        
+        const targetElement = document.querySelector(this.hash);
+        const offsetTop = targetElement.offsetTop;
+        
+        window.scrollTo({
+          top: offsetTop - 80, // Ajuste para o header fixo
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // Mobile nav toggle
+  const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+  if (mobileNavToggle) {
+    mobileNavToggle.addEventListener('click', function(e) {
+      document.querySelector('#header').classList.toggle('navbar-mobile');
+      this.classList.toggle('bi-list');
+      this.classList.toggle('bi-x');
+    });
+  }
+
+  // Função para ajustar a altura dos cards de projetos
+  function equalizeProjectCardHeights() {
+    const projectCards = document.querySelectorAll('.project-card');
+    let maxHeight = 0;
+    
+    // Resetar alturas
+    projectCards.forEach(card => {
+      card.style.height = 'auto';
+    });
+    
+    // Encontrar a altura máxima
+    projectCards.forEach(card => {
+      const height = card.offsetHeight;
+      if (height > maxHeight) {
+        maxHeight = height;
+      }
+    });
+    
+    // Aplicar altura máxima a todos os cards
+    projectCards.forEach(card => {
+      card.style.height = `${maxHeight}px`;
+    });
+  }
+
+  // Chamar a função quando a página carregar e quando redimensionar
+  window.addEventListener('load', equalizeProjectCardHeights);
+  window.addEventListener('resize', equalizeProjectCardHeights);
 });
 
 function loadSkills() {
   fetch('assets/skills.json')
     .then(response => response.json())
     .then(data => {
-      const skillIconsContainer = document.getElementById('skill-icons');
-      data.skills.forEach(skill => {
-        const slide = document.createElement('div');
-        slide.className = 'swiper-slide';
-        const img = document.createElement('img');
-        img.src = `assets/img/skills/${skill}`;
-        img.alt = skill.replace('.png', '');
-        img.title = skill.replace('.png', '');
-        img.className = 'skill-icon'; // Adicionando uma classe específica
-        slide.appendChild(img);
-        skillIconsContainer.appendChild(slide);
-      });
+      // Carregar o carrossel
+      loadSkillsCarousel(data.skills);
       
-      // Inicialize o Swiper após adicionar todos os slides
-      initSkillsSlider();
+      // Carregar a grade
+      loadSkillsGrid(data.skills);
     })
     .catch(error => console.error('Erro ao carregar as habilidades:', error));
 }
 
-function initSkillsSlider() {
-  new Swiper('.skills-slider', {
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    loop: true,
-    autoplay: {
-      delay: 0,
-      disableOnInteraction: false,
-    },
-    speed: 5000,
-    grabCursor: true,
-    mousewheelControl: true,
-    keyboardControl: true,
+function loadSkillsCarousel(skills) {
+  const skillIconsContainer = document.getElementById('skill-icons');
+  if (!skillIconsContainer) return;
+  
+  // Limpar o container primeiro
+  skillIconsContainer.innerHTML = '';
+  
+  // Criar uma quantidade suficiente de cópias para garantir um loop contínuo
+  const repeatedSkills = [];
+  for (let i = 0; i < 4; i++) {
+    repeatedSkills.push(...skills);
+  }
+  
+  repeatedSkills.forEach(skill => {
+    const slide = document.createElement('div');
+    slide.className = 'swiper-slide';
+    
+    const img = document.createElement('img');
+    img.src = `assets/img/skills/${skill}`;
+    img.alt = skill.replace('.png', '').replace('.svg', '');
+    img.title = skill.replace('.png', '').replace('.svg', '');
+    img.className = 'skill-icon';
+    img.loading = 'lazy';
+    
+    slide.appendChild(img);
+    skillIconsContainer.appendChild(slide);
   });
+  
+  // Substituir o Swiper por uma solução CSS pura para animação contínua
+  const skillsSlider = document.querySelector('.skills-slider');
+  skillsSlider.classList.add('skills-marquee');
+  
+  // Ajustar a velocidade da animação com base na quantidade de skills
+  const marqueeWrapper = document.querySelector('.skills-marquee .swiper-wrapper');
+  if (marqueeWrapper) {
+    const duration = Math.max(20, skills.length * 1.5);
+    marqueeWrapper.style.animationDuration = `${duration}s`;
+  }
+}
+
+function loadSkillsGrid(skills) {
+  const skillsGridContainer = document.getElementById('skills-grid-container');
+  if (!skillsGridContainer) return;
+  
+  // Limpar o container primeiro
+  skillsGridContainer.innerHTML = '';
+  
+  // Ordenar habilidades alfabeticamente para a visualização em grade
+  const sortedSkills = [...skills].sort();
+  
+  sortedSkills.forEach(skill => {
+    const skillName = skill.replace('.png', '').replace('.svg', '');
+    
+    // Criar coluna
+    const col = document.createElement('div');
+    col.className = 'col-6 col-md-4 col-lg-3 skill-grid-item';
+    
+    // Criar imagem
+    const img = document.createElement('img');
+    img.src = `assets/img/skills/${skill}`;
+    img.alt = skillName;
+    img.title = skillName;
+    img.loading = 'lazy';
+    
+    // Criar nome da habilidade
+    const name = document.createElement('p');
+    name.textContent = formatSkillName(skillName);
+    
+    // Adicionar elementos
+    col.appendChild(img);
+    col.appendChild(name);
+    skillsGridContainer.appendChild(col);
+  });
+}
+
+function formatSkillName(name) {
+  // Formatar o nome da habilidade para exibição
+  // Exemplo: "javascript" -> "JavaScript"
+  const specialCases = {
+    'html5': 'HTML5',
+    'css3': 'CSS3',
+    'javascript': 'JavaScript',
+    'typescript': 'TypeScript',
+    'nodejs': 'Node.js',
+    'vuejs': 'Vue.js',
+    'reactjs': 'React',
+    'nextjs': 'Next.js',
+    'nuxtjs': 'Nuxt.js',
+    'mongodb': 'MongoDB',
+    'mysql': 'MySQL',
+    'postgresql': 'PostgreSQL',
+    'aws': 'AWS',
+    'docker': 'Docker',
+    'kubernetes': 'Kubernetes',
+    'git': 'Git',
+    'github': 'GitHub',
+    'php': 'PHP',
+    'laravel': 'Laravel',
+    'python': 'Python',
+    'django': 'Django',
+    'flask': 'Flask',
+    'java': 'Java',
+    'spring': 'Spring',
+    'csharp': 'C#',
+    'dotnet': '.NET',
+    'angular': 'Angular',
+    'vue': 'Vue.js',
+    'react': 'React',
+    'node': 'Node.js'
+  };
+  
+  return specialCases[name.toLowerCase()] || 
+         name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+/**
+ * Projects isotope and filter
+ */
+window.addEventListener('load', () => {
+  let projectsContainer = select('.projects-container');
+  if (projectsContainer) {
+    let projectsIsotope = new Isotope(projectsContainer, {
+      itemSelector: '.projects-item',
+      layoutMode: 'fitRows'
+    });
+
+    let projectsFilters = select('#projects-flters li', true);
+
+    on('click', '#projects-flters li', function(e) {
+      e.preventDefault();
+      projectsFilters.forEach(function(el) {
+        el.classList.remove('filter-active');
+      });
+      this.classList.add('filter-active');
+
+      projectsIsotope.arrange({
+        filter: this.getAttribute('data-filter')
+      });
+      projectsIsotope.on('arrangeComplete', function() {
+        AOS.refresh()
+      });
+    }, true);
+  }
+});
+
+/**
+ * Skills animation with intersection observer
+ */
+function setupSkillsAnimation() {
+  const skillIcons = document.querySelectorAll('.skill-icon');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animated');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  skillIcons.forEach(icon => {
+    observer.observe(icon);
+  });
+}
+
+function setupDarkModeToggle() {
+  // Implementation of setupDarkModeToggle function
 }

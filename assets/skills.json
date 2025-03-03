@@ -1,20 +1,22 @@
 {
     "skills": [
-      "vue.png",
-      "nodejs.png",
-      "javascript.png",
       "html.png",
       "css.png",
-      "bootstrap.png",
-      "postgres.png",
-      "mysql.png",
-      "webstorm.png",
-      "vscode.png",
-      "git.png",
+      "javascript.png",
       "postman.png",
+      "vue.png",
+      "quasar.png",
       "kubernetes.png",
-      "docker.png",
+      "azure-devops.png",
+      "nodejs.png",
       "grafana.png",
+      "mysql.png",
+      "docker.png",
+      "n8n.png",
+      "rabbitMQ.png",
+      "vscode.png",
+      "webstorm.png",
+      "git.png",
       "electron.png"
     ]
   }
