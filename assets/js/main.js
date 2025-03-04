@@ -303,8 +303,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Inicializar Swiper para as habilidades
   loadSkills();
   
-  // Inicializar o rastreamento ocular
+  // Inicializar o rastreamento ocular e animações do avatar
   initEyeTracking();
+  initAvatarAnimations();
 
   // Preloader
   const preloader = document.querySelector('#preloader');
@@ -616,7 +617,7 @@ function setupDarkModeToggle() {
   // Implementation of setupDarkModeToggle function
 }
 
-// Função para rastreamento ocular - com ajustes para movimento mais suave
+// Função para rastreamento ocular
 function initEyeTracking() {
   const leftEye = document.getElementById('leftEye');
   const rightEye = document.getElementById('rightEye');
@@ -684,4 +685,57 @@ function initEyeTracking() {
   
   // Iniciar a animação de piscar após um pequeno atraso
   setTimeout(blinkEyes, 2000);
+}
+
+// Função para animações adicionais do avatar
+function initAvatarAnimations() {
+  const characterContainer = document.querySelector('.character-container');
+  if (!characterContainer) return;
+  
+  // Adicionar movimento sutil ao passar o mouse
+  document.addEventListener('mousemove', function(e) {
+    // Calcular a posição relativa do mouse na tela
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+    
+    // Aplicar uma rotação sutil baseada na posição do mouse
+    // Valores pequenos para manter o movimento sutil
+    const rotateY = (mouseX - 0.5) * 3; // -1.5 a 1.5 graus
+    const rotateX = (mouseY - 0.5) * 2; // -1 a 1 graus
+    
+    // Aplicar a transformação com uma transição suave
+    characterContainer.style.transition = 'transform 0.3s ease-out';
+    characterContainer.style.transform = `perspective(1000px) rotateY(${rotateY}deg) rotateX(${-rotateX}deg) translateY(${Math.sin(Date.now() / 2000) * 5}px)`;
+  });
+  
+  // Adicionar movimento aleatório quando não houver interação
+  let idleAnimationInterval;
+  
+  function startIdleAnimation() {
+    idleAnimationInterval = setInterval(() => {
+      if (document.hidden) return;
+      
+      // Movimento aleatório sutil
+      const randomRotateY = (Math.random() - 0.5) * 2; // -1 a 1 graus
+      const randomRotateX = (Math.random() - 0.5) * 1; // -0.5 a 0.5 graus
+      
+      characterContainer.style.transition = 'transform 2s ease-in-out';
+      characterContainer.style.transform = `perspective(1000px) rotateY(${randomRotateY}deg) rotateX(${randomRotateX}deg) translateY(${Math.sin(Date.now() / 2000) * 5}px)`;
+    }, 3000);
+  }
+  
+  function stopIdleAnimation() {
+    clearInterval(idleAnimationInterval);
+  }
+  
+  // Iniciar animação de idle quando não houver movimento do mouse
+  let mouseTimeout;
+  document.addEventListener('mousemove', function() {
+    stopIdleAnimation();
+    clearTimeout(mouseTimeout);
+    mouseTimeout = setTimeout(startIdleAnimation, 5000);
+  });
+  
+  // Iniciar animação de idle
+  startIdleAnimation();
 }

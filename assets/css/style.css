@@ -174,7 +174,7 @@ section {
 }
 
 #header .logo a {
-  color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 #header .logo a span {
@@ -481,17 +481,9 @@ input:checked + .slider:before {
   .navbar-mobile .theme-switch-wrapper {
     margin: 15px 0;
   }
-  
-  .hero-avatar {
-    opacity: 0.7;
-    filter: grayscale(1);
-    width: 400px;
-    height: 400px;
-    bottom: -50px;
-    right: -50px;
-  }
-}
 
+}
+/* 
 @media (max-width: 768px) {
   .hero-avatar {
     opacity: 0.7;
@@ -501,7 +493,7 @@ input:checked + .slider:before {
     bottom: -30px;
     right: -30px;
   }
-}
+} */
 
 /* Animações */
 @keyframes fadeInRight {
@@ -516,20 +508,23 @@ input:checked + .slider:before {
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Hero Section - Avatar Animado
 --------------------------------------------------------------*/
-#hero {
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(135deg, rgba(30, 42, 74, 0.9), rgba(78, 115, 223, 0.9));
-  position: relative;
-  overflow: hidden;
+.character-container {
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  z-index: 1;
+  transform-origin: bottom center;
+  animation: avatarBreathing 4s ease-in-out infinite;
 }
 
 .hero-avatar {
   filter: drop-shadow(2px 4px 6px black);
   position: absolute;
-  bottom: -100px;
+  bottom: 49px;
   right: -100px;
   width: 1000px;
   height: 1000px;
@@ -537,9 +532,30 @@ input:checked + .slider:before {
   background-size: contain;
   background-position: bottom right;
   background-repeat: no-repeat;
-  opacity: 0.8;
   z-index: 0;
-  animation: fadeInRight 1.5s ease-out;
+}
+
+/* Animação de respiração */
+@keyframes avatarBreathing {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(0.5deg);
+  }
+}
+
+/* Animação de flutuação para a cabeça */
+@keyframes headMovement {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(0.5deg);
+  }
+  75% {
+    transform: rotate(-0.5deg);
+  }
 }
 
 /* Estilos para os olhos animados */
@@ -550,7 +566,6 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  transition: height 0.1s ease-out;
   clip-path: polygon(50% 0%, 90% 25%, 90% 75%, 50% 100%, 10% 75%, 10% 25%);
 }
 
@@ -574,98 +589,38 @@ input:checked + .slider:before {
 
 #leftEye {
   width: 96px;
-    height: 34px;
-    top: 393px;
-    right: 452px;
-    transform: rotate(15deg);
+  height: 34px;
+  top: -55px;
+  right: 353px;
+  transform: rotate(5deg) scale(1);
+  animation: eyeMovement 7s ease-in-out infinite 0.5s;
 }
 
 #rightEye {
   width: 90px;
   height: 30px;
-  top: 432px;
-  right: 321px;
-  transform: rotate(5deg);
+  top: -16px;
+  right: 222px;
+  transform: rotate(5deg) scale(1);
+  animation: eyeMovement 7s ease-in-out infinite 0.5s;
 }
 
-/* Ajustes responsivos para os olhos */
-@media (max-width: 1200px) {
-  .hero-avatar {
-    bottom: -100px;
-    right: -338px;
-    width: 1000px;
-    height: 1000px;
+/* Animação  para os olhos */
+@keyframes eyeMovement {
+  0%, 100% {
+    transform-origin: center;
+    transform: rotate(5deg) scale(1);
   }
-  #leftEye {
-    width: 96px;
-      height: 34px;
-      top: 393px;
-      right: 452px;
-      transform: rotate(15deg);
-  }
-  
-  #rightEye {
-    width: 90px;
-    height: 30px;
-    top: 432px;
-    right: 321px;
-    transform: rotate(5deg);
+  50% {
+    transform-origin: center;
+    transform: rotate(5deg) scale(1.05);
   }
 }
 
-@media (max-width: 991px) {
-  .hero-avatar {
-    bottom: -100px;
-    right: -338px;
-    width: 1000px;
-    height: 1000px;
-  }
-  
-  #leftEye {
-    width: 96px;
-      height: 34px;
-      top: 393px;
-      right: 452px;
-      transform: rotate(15deg);
-  }
-  
-  #rightEye {
-    width: 90px;
-    height: 30px;
-    top: 432px;
-    right: 321px;
-    transform: rotate(5deg);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-avatar {
-    bottom: -100px;
-    right: -338px;
-    width: 1000px;
-    height: 1000px;
-  }
-  
-  #leftEye {
-    width: 96px;
-      height: 34px;
-      top: 393px;
-      right: 452px;
-      transform: rotate(15deg);
-  }
-  
-  #rightEye {
-    width: 90px;
-    height: 30px;
-    top: 432px;
-    right: 321px;
-    transform: rotate(5deg);
-  }
-  
-}
 
 #hero .hero-container {
-  text-align: center;
+  text-align: right;
+  align-self: baseline;
   padding: 0 15px;
   position: relative;
   z-index: 2;
@@ -673,12 +628,15 @@ input:checked + .slider:before {
 
 #hero h1 {
   margin: 0;
-  font-size: 56px;
+  font-size: 155px;
   font-weight: 700;
   line-height: 64px;
   color: #fff;
   font-family: "Montserrat", sans-serif;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  font-size: calc(60px + 5vw); /* Ajuste os valores conforme necessário */
+  line-height: 1.2; /* Ajuste o line-height conforme necessário */
+  margin: 0; /* Reset de margens */
 }
 
 #hero p {
@@ -1071,7 +1029,7 @@ input:checked + .slider:before {
 }
 
 body.dark-mode a {
-  color: #868686; /* Cor dos links no modo escuro */
+  color: #ffffff; /* Cor dos links no modo escuro */
 }
 
 body.dark-mode header,
@@ -1715,6 +1673,7 @@ body.dark-mode .projects-filter li.filter-active {
 .text-animation-wrapper {
   position: relative;
   animation: moveUp 10s ease infinite;
+  text-align-last: start;
 }
 
 .text-animation-item {
@@ -1726,6 +1685,34 @@ body.dark-mode .projects-filter li.filter-active {
   font-size: 24px;
   font-weight: 500;
   text-align: center;
+  text-align-last: start;
+}
+
+@media (max-width: 1225px) {
+  #hero h1 {
+    font-size: calc(40px + 5vw); /* Ajuste para telas menores */
+  }
+}
+
+@media (max-width: 928px) {
+  #hero h1 {
+    font-size: calc(30px + 5vw); 
+    /* Ajuste para telas muito pequenas */
+  }
+}
+
+@media (max-width: 768px) {
+  #hero .hero-container {
+    text-align-last: center;
+    align-self: center;
+  }
+}
+
+@media (max-width: 480px) {
+  #hero .hero-container {
+    text-align-last: center;
+    align-self: center;
+  }
 }
 
 @keyframes moveUp {
@@ -2170,4 +2157,8 @@ body.dark-mode .projects-filter li.filter-active {
   .skill-grid-item p {
     font-size: 12px;
   }
+}
+.saudacao{
+  text-align: start;
+  margin: revert;
 }
