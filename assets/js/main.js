@@ -302,6 +302,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Inicializar Swiper para as habilidades
   loadSkills();
+  
+  // Inicializar o rastreamento ocular
+  initEyeTracking();
 
   // Preloader
   const preloader = document.querySelector('#preloader');
@@ -611,4 +614,74 @@ function setupSkillsAnimation() {
 
 function setupDarkModeToggle() {
   // Implementation of setupDarkModeToggle function
+}
+
+// Função para rastreamento ocular - com ajustes para movimento mais suave
+function initEyeTracking() {
+  const leftEye = document.getElementById('leftEye');
+  const rightEye = document.getElementById('rightEye');
+  
+  if (!leftEye || !rightEye) return;
+
+  function moveEyes(e) {
+    function calculateEyeMovement(eyeElement, sensitivity = 0.25) {
+      const eyeRect = eyeElement.getBoundingClientRect();
+      const eyeCenterX = eyeRect.left + eyeRect.width / 2;
+      const eyeCenterY = eyeRect.top + eyeRect.height / 2;
+
+      const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+      const maxMoveX = eyeRect.width * sensitivity;
+      const maxMoveY = eyeRect.height * sensitivity;
+      
+      let moveX = Math.cos(angle) * maxMoveX;
+      let moveY = Math.sin(angle) * maxMoveY;
+
+      moveX = Math.max(-maxMoveX, Math.min(maxMoveX, moveX));
+      moveY = Math.max(-maxMoveY, Math.min(maxMoveY, moveY));
+
+      return { moveX, moveY };
+    }
+
+    // Calcular movimento para cada olho
+    const rightEyeMovement = calculateEyeMovement(rightEye);
+    const leftEyeMovement = calculateEyeMovement(leftEye);
+    
+    // Aplicar movimento com transição suave
+    rightEye.querySelector('.pupil').style.transform = 
+      `translate(${rightEyeMovement.moveX}px, ${rightEyeMovement.moveY}px)`;
+    leftEye.querySelector('.pupil').style.transform = 
+      `translate(${leftEyeMovement.moveX}px, ${leftEyeMovement.moveY}px)`;
+  }
+
+  // Adicionar evento de movimento do mouse
+  document.addEventListener('mousemove', moveEyes);
+  
+  // Adicionar suporte para dispositivos móveis
+  document.addEventListener('touchmove', function(e) {
+    const touch = e.touches[0];
+    moveEyes(touch);
+  });
+  
+  // Animação de piscar ocasionalmente
+  function blinkEyes() {
+    if (!document.hidden) {
+      const originalLeftHeight = leftEye.style.height;
+      const originalRightHeight = rightEye.style.height;
+      
+      leftEye.style.height = '0px';
+      rightEye.style.height = '0px';
+      
+      setTimeout(() => {
+        leftEye.style.height = originalLeftHeight;
+        rightEye.style.height = originalRightHeight;
+      }, 200);
+    }
+    
+    // Piscar a cada 3-8 segundos
+    const nextBlink = 3000 + Math.random() * 5000;
+    setTimeout(blinkEyes, nextBlink);
+  }
+  
+  // Iniciar a animação de piscar após um pequeno atraso
+  setTimeout(blinkEyes, 2000);
 }
