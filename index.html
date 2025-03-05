@@ -260,6 +260,44 @@
                 </div>
               </div>
             </div>
+
+               <!-- Projeto 2 -->
+               <div class="col-lg-4 col-md-6 projects-item filter-web" x-show="filter === '*' || filter === '.filter-web'" data-aos="fade-up" data-aos-delay="100">
+                <div class="project-card" x-data="{ project: {
+                  title: 'Removedor fundo de Imagens',
+                  description: 'Este projeto é uma aplicação que permite o usuario remover fundo de imagens',
+                  image: 'https://raw.githubusercontent.com/AndreMTS/removerBG/main/assets/demoRemoverBG.gif',
+                  features: [
+                  'Remoção Inteligente de Fundo: Algoritmo de detecção automática que remove áreas similares com um único clique',
+                   'Modo Pincel Manual: Opção para remover áreas específicas com precisão usando um pincel de tamanho ajustável',
+                   'Controle de Tolerância: Ajuste fino da sensibilidade de detecção de cores similares',
+                   'Zoom Avançado: Ampliação de até 400% para trabalhar em detalhes minuciosos',
+                   'Histórico de Ações: Sistema de desfazer para corrigir erros facilmente',
+                   'e muitos mais verifique mais no github'
+                   ],
+                  link: 'https://github.com/AndreMTS/removerBG'
+                }}">
+                  <div class="project-img">
+                    <img :src="project.image" class="img-fluid" :alt="project.title">
+                    <div class="project-overlay">
+                      <div class="project-info-overlay">
+                        <h4 x-text="project.title"></h4>
+                        <p>Permite remover fundo de Imagens</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="project-info">
+                    <h4 x-text="project.title"></h4>
+                    <p>Permite remover fundo de Imagens</p>
+                    <div class="project-links">
+                      <a :href="project.link" target="_blank" class="github"><i class="bx bxl-github"></i></a>
+                      <button type="button" class="btn-project" @click="$dispatch('open-modal', { project })">
+                        Ver Detalhes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             
             <!-- Projeto 2 -->
             <div class="col-lg-4 col-md-6 projects-item filter-web" x-show="filter === '*' || filter === '.filter-web'" data-aos="fade-up" data-aos-delay="100">
