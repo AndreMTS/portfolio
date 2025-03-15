@@ -233,6 +233,36 @@
             <!-- Projeto 1 -->
             <div class="col-lg-4 col-md-6 projects-item filter-tool" x-show="filter === '*' || filter === '.filter-tool'" data-aos="fade-up">
               <div class="project-card" x-data="{ project: {
+                title: 'Chatbot Interface',
+                description: 'Interface de chat interativa para integração com webhooks e APIs, oferecendo suporte a mensagens de texto e áudio.',
+                image: 'https://raw.githubusercontent.com/AndreMTS/chatbot/refs/heads/main/assets/gif/demostracaoChat.gif',
+                features: ['Gravação e envio de mensagens de áudio', 'Download de mensagens de áudio','Conexão em tempo real via Server-Sent Events (SSE)','Avatares personalizados para usuário e bot','Interface responsiva e amigável'],
+                link: 'https://github.com/AndreMTS/chatbot.git'
+              }}">
+                <div class="project-img">
+                  <img :src="project.image" class="img-fluid" :alt="project.title">
+                  <div class="project-overlay">
+                    <div class="project-info-overlay">
+                      <h4 x-text="project.title"></h4>
+                      <p>Interface de chat interativa para integração com webhooks e APIs</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="project-info">
+                  <h4 x-text="project.title"></h4>
+                  <p>Interface de chat interativa para integração com webhooks e APIs</p>
+                  <div class="project-links">
+                    <a :href="project.link" target="_blank" class="github"><i class="bx bxl-github"></i></a>
+                    <button type="button" class="btn-project" @click="$dispatch('open-modal', { project })">
+                      Ver Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 projects-item filter-tool" x-show="filter === '*' || filter === '.filter-tool'" data-aos="fade-up">
+              <div class="project-card" x-data="{ project: {
                 title: 'Add-on Gerador de Dados Fictícios',
                 description: 'É uma extensão para o Google Chrome que automatiza o preenchimento de formulários web. Ela permite que os usuários definam campos personalizados e os preencham automaticamente, economizando tempo e reduzindo erros de digitação.',
                 image: 'https://raw.githubusercontent.com/AndreMTS/autofill-dev-2/main/assets/demo.gif',
